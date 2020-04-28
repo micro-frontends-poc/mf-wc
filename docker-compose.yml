@@ -1,0 +1,32 @@
+version: "3"
+services:
+  container:
+    container_name: wc-container
+    ports:
+      - "3010:3000"
+    build:
+      context: ./wc-container
+      dockerfile: Dockerfile
+    volumes:
+      - "./wc-container:/var/app"
+      - "/var/app/node_modules"
+  product:
+    container_name: wc-product
+    ports:
+      - "3011:3001"
+    build:
+      context: ./wc-product
+      dockerfile: Dockerfile
+    volumes:
+      - "./wc-product:/var/app"
+      - "/var/app/node_modules"
+  cart:
+    container_name: wc-cart
+    ports:
+      - "3012:4200"
+    build:
+      context: ./wc-cart
+      dockerfile: Dockerfile
+    volumes:
+      - "./wc-cart:/var/app"
+      - "/var/app/node_modules"
