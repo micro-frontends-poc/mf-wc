@@ -1,18 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector, DoBootstrap, ApplicationRef } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  declarations: [CartComponent],
+  imports: [BrowserModule, AppRoutingModule],
+  entryComponents: [CartComponent],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
 })
-export class AppModule { }
+export class AppModule implements DoBootstrap {
+  constructor(injector: Injector) {
+    const custom = createCustomElement(CartComponent, { injector: injector });
+    customElements.define('wc-cart', custom);
+  }
+
+  ngDoBootstrap() {}
+}
