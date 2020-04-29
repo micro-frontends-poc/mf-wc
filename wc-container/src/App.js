@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
+import React, { useState } from "react"
+import { BrowserRouter as Router } from "react-router-dom"
 import "./App.css"
 import Navigation from "./components/Navigation"
-require("./wc-products.js")
+require("./webComponents/wc-products.js")
+require("./webComponents/wc-cart.js")
 
 function App() {
   const [products, setProducts] = useState([])
@@ -22,6 +23,7 @@ function App() {
         />
         <section className="h-full flex relative pt-24">
           <wc-products></wc-products>
+          <wc-cart></wc-cart>
         </section>
       </div>
     </Router>
