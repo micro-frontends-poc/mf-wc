@@ -1,6 +1,11 @@
 <template>
   <div id="app" class=" mt-4">
-    <product v-for="p in products" :key="p.id" :product="p" />
+    <product
+      v-for="p in products"
+      :key="p.id"
+      :product="p"
+      @addProduct="addToCart"
+    />
   </div>
 </template>
 
@@ -10,7 +15,7 @@ import Product from "./components/Product.vue"
 export default {
   name: "App",
   components: {
-    Product
+    Product,
   },
   data() {
     return {
@@ -20,18 +25,34 @@ export default {
           name: "Children of Men",
           description: `Children of Men is a 2006 dystopian action thriller film directed and co-written
            by Alfonso Cuarón.`,
-          price: 10.0
+          price: 10.0,
         },
         {
           id: 2,
           name: "Hunt for the Wilderpeople",
-          description: `A national manhunt is ordered for a rebellious kid and his foster uncle who go 
+          description: `A national manhunt is ordered for a rebellious kid and his foster uncle who go
             missing in the wild New Zealand bush.`,
-          price: 11.0
-        }
-      ]
+          price: 11.0,
+        },
+      ],
     }
-  }
+  },
+  methods: {
+    addToCart(product) {
+      //should work, but doesn't
+      this.$emit("itemAddedToCart", product)
+      // works
+      const addEvent = new CustomEvent("addToCart", {
+        bubbles: true,
+        composed: true,
+        detail: {
+          vm: this,
+          product: product,
+        },
+      })
+      this.$el.dispatchEvent(addEvent)
+    },
+  },
 }
 </script>
 

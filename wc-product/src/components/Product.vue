@@ -17,9 +17,9 @@ export default {
   props: ["product"],
   methods: {
     addToCart() {
-      window.parent.postMessage(this.product, "http://localhost:3000")
-    }
-  }
+      this.$emit("addProduct", this.product)
+    },
+  },
 }
 </script>
 
