@@ -21,11 +21,10 @@ export class CartComponent {
 
   @Input('cartItems')
   set cartItems(items: string) {
-    this.items = JSON.parse(items);
+    if (items) this.items = JSON.parse(items);
   }
 
   removeItem(item: Item, i: Number) {
-    console.log(i);
     const removeEvent = new CustomEvent('cartItemRemoved', {
       bubbles: true,
       composed: true,

@@ -3,12 +3,11 @@ import { NgModule, Injector, DoBootstrap, ApplicationRef } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { AppRoutingModule } from './app-routing.module';
 import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [CartComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule],
   entryComponents: [CartComponent],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
 })

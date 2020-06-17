@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="mode">
     <product
       v-for="p in products"
       :key="p.id"
@@ -17,7 +17,7 @@ export default {
   name: "App",
   props: {
     mode: {
-      default: "light",
+      default: "dark",
     },
   },
   components: {
@@ -76,11 +76,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+body {
+  margin: 0;
+}
 #app {
+  &.light {
+    --color-bg: hsla(0, 0%, 100%, 0.89);
+  }
+
+  &.dark {
+    --color-bg: hsl(235, 33%, 23%);
+  }
+  background: var(--color-bg);
   font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 </style>
