@@ -23,7 +23,7 @@ function App() {
       setProducts([])
     }
     const handleModeChanged = (e) => {
-      if (e.origin.startsWith("http://localhost:8080")) setColorMode(e.data)
+      if (event.data.type === "theme") setColorMode(e.data.value)
     }
     window.addEventListener("message", handleModeChanged)
     window.addEventListener("addToCart", handleItemAdded)
@@ -58,7 +58,9 @@ function App() {
 
           <wc-cart
             style={{ height: "96%" }}
-            class="absolute top-0 right-0 w-full md:w-1/2"
+            class={
+              cartToggle ? "absolute top-0 right-0 w-full md:w-1/2" : "hidden"
+            }
             cart-items={JSON.stringify(products)}
             mode={JSON.stringify(colorMode)}
           ></wc-cart>
