@@ -14,8 +14,11 @@ const Navigation = (props) => {
           <span className="font-bold text-xl tracking-tight">MICROSHOP</span>
         </Link>
       </div>
+      {props.user && 
+        <span className="ml-auto mr-6 font-bold text-white">Hi, {props.user}</span>
+      }
       <button
-        className="inline-block text-sm px-4 py-2 ml-auto leading-none rounded border-white border-2 hover:border-transparent text-white hover:text-purple-800 hover:bg-white"
+        className="inline-block text-sm px-4 py-2 leading-none rounded border-white border-2 hover:border-transparent text-white hover:text-purple-800 hover:bg-white"
         onClick={(e) => openCart(e)}
       >
         Checkout ({props.products.length})

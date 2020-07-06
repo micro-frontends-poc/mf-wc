@@ -9,6 +9,7 @@ function App() {
   const [products, setProducts] = useState([])
   const [cartToggle, setCartToggle] = useState(false)
   const [colorMode, setColorMode] = useState("light")
+  const [username, setUsername] = useState("")
 
   useEffect(() => {
     const handleItemAdded = (e) => {
@@ -23,8 +24,10 @@ function App() {
       setProducts([])
     }
     const handleModeChanged = (e) => {
-      if (event.data.type === "theme") setColorMode(e.data.value)
+      if (e.data.type === "theme") setColorMode(e.data.value)
+      else if (e.data.type === "user") setUsername(e.data.value)
     }
+
     window.addEventListener("message", handleModeChanged)
     window.addEventListener("addToCart", handleItemAdded)
     window.addEventListener("cartItemRemoved", handleItemRemoved)
@@ -49,6 +52,7 @@ function App() {
         }`}
       >
         <Navigation
+          user={username}
           products={products}
           cartToggle={cartToggle}
           onCartToggleChange={handleCartToggle}
